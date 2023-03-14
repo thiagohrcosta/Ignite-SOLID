@@ -7,17 +7,14 @@ class ShowUserProfileController {
 
   handle(request: Request, response: Response): Response {
     const { user_id } = request.params;
-    console.log(user_id);
 
-    const findSelectedUser = this.showUserProfileUseCase.execute({
-      user_id: String(user_id),
-    });
+    try {
+      const user = this.showUserProfileUseCase.execute({ user_id });
 
-    if (!findSelectedUser) {
-      throw new Error("User not found!");
+      return response.json(user);
+    } catch (error) {
+      return response.status(404).json({ error: error.message });
     }
-
-    return response.json(findSelectedUser);
   }
 }
 
