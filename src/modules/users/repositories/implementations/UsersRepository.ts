@@ -22,6 +22,7 @@ class UsersRepository implements IUsersRepository {
     const user = new User();
 
     Object.assign(user, {
+      admin: false,
       name,
       email,
       created_at: new Date(),

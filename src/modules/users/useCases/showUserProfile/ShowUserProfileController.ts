@@ -6,7 +6,8 @@ class ShowUserProfileController {
   constructor(private showUserProfileUseCase: ShowUserProfileUseCase) {}
 
   handle(request: Request, response: Response): Response {
-    const { user_id } = request.headers;
+    const { user_id } = request.params;
+    console.log(user_id);
 
     const findSelectedUser = this.showUserProfileUseCase.execute({
       user_id: String(user_id),
