@@ -6,7 +6,17 @@ class ShowUserProfileController {
   constructor(private showUserProfileUseCase: ShowUserProfileUseCase) {}
 
   handle(request: Request, response: Response): Response {
-    // Complete aqui
+    const { user_id } = request.headers;
+
+    const findSelectedUser = this.showUserProfileUseCase.execute({
+      user_id: String(user_id),
+    });
+
+    if (!findSelectedUser) {
+      throw new Error("User not found!");
+    }
+
+    return response.json(findSelectedUser);
   }
 }
 
